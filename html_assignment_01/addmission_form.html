@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SUNBEAM - HTML Assignment</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+
+      .logo {
+        display: block;
+        margin: 20px auto 10px auto;
+        width: 300px;
+      }
+
+      h2 {
+        margin-top: 0px;
+        margin-bottom: 15px;
+      }
+
+      .container {
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .video-box {
+        width: 48%;
+      }
+
+      .video-box iframe {
+        width: 100%;
+        height: 320px;
+      }
+
+      .form-box {
+        width: 48%;
+        text-align: left;
+      }
+
+      table td {
+        padding: 4px 5px;
+        vertical-align: top;
+      }
+
+      input,
+      textarea,
+      select {
+        padding: 4px;
+        width: 90%;
+      }
+
+      .gender-box input {
+        width: auto;
+        margin-left: 5px;
+        margin-right: 3px;
+      }
+
+      .skill-box input {
+        width: auto;
+        margin-left: 5px;
+        margin-right: 3px;
+      }
+
+      button {
+        padding: 6px 12px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Headings -->
+    <h1>Welcome to SUNBEAM Institute</h1>
+    <h2>HTML Assignment</h2>
+    <h3>Demonstration of Basic Tags</h3>
+    <h4>Heading Level 4</h4>
+    <h5>Heading Level 5</h5>
+    <h6>Heading Level 6</h6>
+
+    <hr />
+
+    <!-- Image -->
+    <h2>Institute Image</h2>
+    <img src="./images/images.jpg" alt="Sunbeam Image" width="300" />
+
+    <hr />
+
+    <!-- Table -->
+    <h2>Sample Table</h2>
+
+    <!-- CENTERED TABLE -->
+    <div style="width: 100%; display: flex; justify-content: center">
+      <table border="1" cellpadding="8">
+        <tr>
+          <th colspan="3" align="center">Student Information</th>
+        </tr>
+
+        <tr>
+          <td>Roll No</td>
+          <td>Name</td>
+          <td>Course</td>
+        </tr>
+
+        <tr>
+          <td>1</td>
+          <td>Aditi</td>
+          <td>Full Stack Development</td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+          <td>Ritesh</td>
+          <td>Python Development</td>
+        </tr>
+      </table>
+    </div>
+
+    <hr />
+
+    <!-- Form -->
+    <h2>Registration Form</h2>
+
+    <img src="./images/new.png" class="logo" />
+
+    <h2>Sunbeam Registration Form</h2>
+
+    <div class="container">
+      <!-- VIDEO LEFT -->
+      <div class="video-box">
+        <iframe
+          src="https://www.youtube.com/embed/02q9aAVv1NI"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <!-- FORM RIGHT -->
+      <div class="form-box">
+        <form>
+          <table>
+            <tr>
+              <td align="right">Name:</td>
+              <td><input type="text" /></td>
+            </tr>
+
+            <tr>
+              <td align="right">BirthDate:</td>
+              <td><input type="date" /></td>
+            </tr>
+
+            <tr>
+              <td align="right">Email:</td>
+              <td><input type="email" /></td>
+            </tr>
+
+            <tr>
+              <td align="right">Password:</td>
+              <td><input type="password" /></td>
+            </tr>
+
+            <tr>
+              <td align="right">Address:</td>
+              <td>
+                <textarea rows="5">
+Sunbeam Institute of IT
+'Anuda Chambers', 203
+Shaniwar Peth, Near
+Gujar Hospital, Karad-
+415110 (Maharashtra)</textarea
+                >
+              </td>
+            </tr>
+
+            <tr>
+              <td align="right">Gender:</td>
+              <td class="gender-box">
+                <input type="radio" name="gender" /> Male
+                <input type="radio" name="gender" /> Female
+              </td>
+            </tr>
+
+            <tr>
+              <td align="right">Upload Photo:</td>
+              <td><input type="file" /></td>
+            </tr>
+
+            <tr>
+              <td align="right">Select Course:</td>
+              <td>
+                <select>
+                  <option>Select course</option>
+                  <option>DAC</option>
+                  <option>DBDA</option>
+                  <option>DITISS</option>
+                  <option>AI</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="right">Skill Set:</td>
+              <td class="skill-box">
+                <input type="checkbox" /> Java <input type="checkbox" /> CPP
+                <input type="checkbox" /> OS
+              </td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td>
+                <button type="submit">Register</button>
+                <button type="reset">Clear</button>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+
+    <hr />
+  </body>
+</html>
