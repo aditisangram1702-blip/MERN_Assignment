@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Student Portal Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .login-card {
+        max-width: 420px;
+        width: 100%;
+        border-radius: 15px;
+      }
+
+      .portal-title {
+        color: #2c5364;
+        font-weight: bold;
+      }
+
+      .error {
+        color: red;
+        font-size: 0.9rem;
+      }
+
+      .logo {
+        width: 80px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card shadow-lg login-card p-4">
+      <div class="text-center">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png"
+          class="logo mb-2"
+          alt="student"
+        />
+        <h3 class="portal-title">Student Portal</h3>
+        <p class="text-muted">Educational Institution Login</p>
+      </div>
+
+      <form onsubmit="return login()">
+        <!-- Email -->
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input
+            type="text"
+            id="email"
+            class="form-control"
+            placeholder="example@gmail.com"
+            oninput="validateEmailPattern()"
+          />
+          <div id="emailError" class="error"></div>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <div class="input-group">
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              placeholder="Password@123"
+              oninput="validatePasswordPattern()"
+            />
+            <span
+              class="input-group-text"
+              style="cursor: pointer"
+              onclick="togglePassword()"
+            >
+              👁️
+            </span>
+          </div>
+          <div id="passwordError" class="error"></div>
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary btn-lg">Login</button>
+        </div>
+      </form>
+
+      <div class="text-center mt-3">
+        <small class="text-muted">© 2025 Student Portal</small>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const passwordPattern =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+      function togglePassword() {
+        const pwd = document.getElementById("password");
+        pwd.type = pwd.type === "password" ? "text" : "password";
+      }
+
+      function clearInputs() {
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("emailError").innerText = "";
+        document.getElementById("passwordError").innerText = "";
+      }
+
+      function validateEmailPattern() {
+        const email = document.getElementById("email").value.trim();
+        const emailError = document.getElementById("emailError");
+
+        if (email === "") {
+          emailError.innerText = "Email is required";
+          return false;
+        }
+
+        if (!emailPattern.test(email)) {
+          emailError.innerText = "Invalid email format";
+          return false;
+        }
+
+        emailError.innerText = "";
+        return true;
+      }
+
+      function validatePasswordPattern() {
+        const password = document.getElementById("password").value.trim();
+        const passwordError = document.getElementById("passwordError");
+
+        if (password === "") {
+          passwordError.innerText = "Password is required";
+          return false;
+        }
+
+        if (!passwordPattern.test(password)) {
+          passwordError.innerText =
+            "Password pattern is incorrect (8+ chars, upper, lower, number & special char)";
+          return false;
+        }
+
+        passwordError.innerText = "";
+        return true;
+      }
+
+      function login() {
+        // Stop if patterns are invalid
+        if (!validateEmailPattern() || !validatePasswordPattern()) {
+          return false;
+        }
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        if (email === "admin@gmail.com" && password === "Admin@123") {
+          Swal.fire({
+            icon: "success",
+            title: "Login Successful 🎉",
+            text: "Welcome to Student Portal",
+          }).then(() => clearInputs());
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Login Failed ❌",
+            text: "Invalid email or password",
+          }).then(() => clearInputs());
+        }
+
+        return false; // prevent page reload
+      }
+    </script>
+  </body>
+</html>
