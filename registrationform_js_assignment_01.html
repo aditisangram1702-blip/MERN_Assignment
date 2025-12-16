@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Student Portal - Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .register-card {
+        max-width: 420px;
+        width: 100%;
+        border-radius: 15px;
+      }
+
+      .portal-title {
+        color: #2c5364;
+        font-weight: bold;
+      }
+
+      .error {
+        color: red;
+        font-size: 0.9rem;
+      }
+
+      .logo {
+        width: 80px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card shadow-lg register-card p-4">
+      <div class="text-center">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png"
+          class="logo mb-2"
+          alt="student"
+        />
+        <h3 class="portal-title">Student Registration</h3>
+        <p class="text-muted">Create your account</p>
+      </div>
+
+      <form onsubmit="return register()">
+        <!-- Name -->
+        <div class="mb-3">
+          <label class="form-label">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            placeholder="Enter full name"
+            oninput="validateName()"
+          />
+          <div id="nameError" class="error"></div>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input
+            type="text"
+            id="email"
+            class="form-control"
+            placeholder="example@gmail.com"
+            oninput="validateEmail()"
+          />
+          <div id="emailError" class="error"></div>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <div class="input-group">
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              placeholder="Strong password"
+              oninput="validatePassword()"
+            />
+            <span
+              class="input-group-text"
+              style="cursor: pointer"
+              onclick="togglePassword()"
+            >
+              👁️
+            </span>
+          </div>
+          <div id="passwordError" class="error"></div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="mb-3">
+          <label class="form-label">Mobile Number</label>
+          <input
+            type="text"
+            id="mobile"
+            class="form-control"
+            placeholder="10-digit mobile number"
+            oninput="validateMobile()"
+          />
+          <div id="mobileError" class="error"></div>
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary btn-lg">Register</button>
+        </div>
+      </form>
+
+      <div class="text-center mt-3">
+        <small class="text-muted">© 2025 Student Portal</small>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const passwordPattern =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      const mobilePattern = /^[0-9]{10}$/;
+
+      function togglePassword() {
+        const pwd = document.getElementById("password");
+        pwd.type = pwd.type === "password" ? "text" : "password";
+      }
+
+      function clearInputs() {
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("mobile").value = "";
+
+        document.getElementById("nameError").innerText = "";
+        document.getElementById("emailError").innerText = "";
+        document.getElementById("passwordError").innerText = "";
+        document.getElementById("mobileError").innerText = "";
+      }
+
+      function validateName() {
+        const name = document.getElementById("name").value.trim();
+        const error = document.getElementById("nameError");
+
+        if (name === "") {
+          error.innerText = "Name is required";
+          return false;
+        }
+        error.innerText = "";
+        return true;
+      }
+
+      function validateEmail() {
+        const email = document.getElementById("email").value.trim();
+        const error = document.getElementById("emailError");
+
+        if (email === "") {
+          error.innerText = "Email is required";
+          return false;
+        }
+        if (!emailPattern.test(email)) {
+          error.innerText = "Invalid email format";
+          return false;
+        }
+        error.innerText = "";
+        return true;
+      }
+
+      function validatePassword() {
+        const password = document.getElementById("password").value.trim();
+        const error = document.getElementById("passwordError");
+
+        if (password === "") {
+          error.innerText = "Password is required";
+          return false;
+        }
+        if (!passwordPattern.test(password)) {
+          error.innerText =
+            "Password must be 8+ chars with upper, lower, number & special char";
+          return false;
+        }
+        error.innerText = "";
+        return true;
+      }
+
+      function validateMobile() {
+        const mobile = document.getElementById("mobile").value.trim();
+        const error = document.getElementById("mobileError");
+
+        if (mobile === "") {
+          error.innerText = "Mobile number is required";
+          return false;
+        }
+        if (!mobilePattern.test(mobile)) {
+          error.innerText = "Mobile number must be 10 digits";
+          return false;
+        }
+        error.innerText = "";
+        return true;
+      }
+
+      function register() {
+        if (
+          validateName() &&
+          validateEmail() &&
+          validatePassword() &&
+          validateMobile()
+        ) {
+          Swal.fire({
+            icon: "success",
+            title: "Registration Successful 🎉",
+            text: "You can now login to Student Portal",
+          }).then(() => clearInputs());
+        }
+        return false;
+      }
+    </script>
+  </body>
+</html>
